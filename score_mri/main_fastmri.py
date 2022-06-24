@@ -14,14 +14,16 @@
 # limitations under the License.
 
 """Training and evaluation"""
+import logging
+import os
 
-import run_lib_fastmri
 from absl import app
 from absl import flags
 from ml_collections.config_flags import config_flags
-import logging
-import os
 import tensorflow as tf
+
+from score_mri import run_lib_fastmri
+
 
 FLAGS = flags.FLAGS
 

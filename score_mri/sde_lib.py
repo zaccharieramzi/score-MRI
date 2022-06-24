@@ -1,7 +1,8 @@
 """Abstract SDE classes, Reverse SDE, and VE/VP SDEs."""
 import abc
-import torch
+
 import numpy as np
+import torch
 
 
 class SDE(abc.ABC):
