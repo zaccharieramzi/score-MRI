@@ -1,7 +1,4 @@
-import os
-
 from unittest.mock import patch
-import torch
 
 from score_mri.inference_real import main
 
