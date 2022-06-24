@@ -1,19 +1,30 @@
-from pathlib import Path
-from models import utils as mutils
-from sde_lib import VESDE
-from sampling import (ReverseDiffusionPredictor,
-                      LangevinCorrector,
-                      get_pc_fouriercs_RI)
-from models import ncsnpp
-import time
-from utils import fft2, ifft2, get_mask, get_data_scaler, get_data_inverse_scaler, restore_checkpoint
-import torch
-import torch.nn as nn
-import numpy as np
-from models.ema import ExponentialMovingAverage
-import matplotlib.pyplot as plt
-import importlib
 import argparse
+import importlib
+from pathlib import Path
+import time
+
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+
+# this import just registers the model in mutils
+from score_mri.models import ncsnpp  # noqa: F401
+from score_mri.models import utils as mutils
+from score_mri.models.ema import ExponentialMovingAverage
+from score_mri.sde_lib import VESDE
+from score_mri.sampling import (
+    ReverseDiffusionPredictor,
+    LangevinCorrector,
+    get_pc_fouriercs_RI,
+)
+from score_mri.utils import (
+    fft2,
+    ifft2,
+    get_mask,
+    get_data_scaler,
+    get_data_inverse_scaler,
+    restore_checkpoint,
+)
 
 
 def main():
