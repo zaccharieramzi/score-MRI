@@ -3,7 +3,7 @@ from unittest.mock import patch
 from score_mri.inference_real import main
 
 
-def test_inference_real(config):
+def test_inference_real():
     args = [
         "main",
         "--task", "retrospective",
