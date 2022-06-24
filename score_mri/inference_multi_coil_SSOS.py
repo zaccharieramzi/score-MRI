@@ -1,20 +1,32 @@
-from pathlib import Path
-from models import utils as mutils
-from sde_lib import VESDE
-from sampling import (ReverseDiffusionPredictor,
-                      LangevinCorrector,
-                      get_pc_fouriercs_RI_PI_SSOS)
-from models import ncsnpp
-import time
-from utils import fft2_m, ifft2_m, get_mask, get_data_scaler, get_data_inverse_scaler, restore_checkpoint, \
-    normalize_complex, root_sum_of_squares
-import torch
-import torch.nn as nn
-import numpy as np
-from models.ema import ExponentialMovingAverage
-import matplotlib.pyplot as plt
-import importlib
 import argparse
+import importlib
+from pathlib import Path
+import time
+
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+
+# this import is used to register the model in mutils
+from score_mri.models import ncsnpp  # noqa: F401
+from score_mri.models import utils as mutils
+from score_mri.models.ema import ExponentialMovingAverage
+from score_mri.sde_lib import VESDE
+from score_mri.sampling import (
+    ReverseDiffusionPredictor,
+    LangevinCorrector,
+    get_pc_fouriercs_RI_PI_SSOS,
+)
+from score_mri.utils import (
+    fft2_m,
+    ifft2_m,
+    get_mask,
+    get_data_scaler,
+    get_data_inverse_scaler,
+    restore_checkpoint,
+    normalize_complex,
+    root_sum_of_squares,
+)
 
 
 def main():
@@ -30,7 +42,9 @@ def main():
     filename = f'./samples/multi-coil/{fname}.npy'
 
     print('initaializing...')
-    configs = importlib.import_module(f"configs.ve.fastmri_knee_320_ncsnpp_continuous")
+    configs = importlib.import_module(
+        "score_mri.configs.ve.fastmri_knee_320_ncsnpp_continuous",
+    )
     config = configs.get_config()
     img_size = config.data.image_size
     batch_size = 1
