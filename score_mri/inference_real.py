@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
+# this import is used to register the model in mutils
+from score_mri.models import ncsnpp  # noqa: F401
 from score_mri.models import utils as mutils
 from score_mri.models.ema import ExponentialMovingAverage
 from score_mri.sde_lib import VESDE
@@ -40,7 +42,9 @@ def main():
     mask_filename = f'./samples/real/prospective/{fname}_mask.npy'
 
     print('initaializing...')
-    configs = importlib.import_module(f"configs.ve.fastmri_knee_320_ncsnpp_continuous")
+    configs = importlib.import_module(
+        "score_mri.configs.ve.fastmri_knee_320_ncsnpp_continuous",
+    )
     config = configs.get_config()
     img_size = config.data.image_size
     batch_size = 1

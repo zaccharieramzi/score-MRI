@@ -16,7 +16,7 @@
 # Lint as: python3
 """Training NCSN++ on fastmri knee with VE SDE."""
 
-from configs.default_lsun_configs import get_default_configs
+from score_mri.configs.default_lsun_configs import get_default_configs
 
 
 def get_config():
