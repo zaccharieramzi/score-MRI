@@ -40,7 +40,9 @@ def main():
     filename = f'./samples/single-coil/{fname}.npy'
 
     print('initaializing...')
-    configs = importlib.import_module(f"configs.ve.fastmri_knee_320_ncsnpp_continuous")
+    configs = importlib.import_module(
+        "score_mri.configs.ve.fastmri_knee_320_ncsnpp_continuous",
+    )
     config = configs.get_config()
     img_size = config.data.image_size
     batch_size = 1
